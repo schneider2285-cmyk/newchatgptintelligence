@@ -1,226 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Account Intelligence Dashboard</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      height: 100vh;
-      background-color: #f5f6fa;
-    }
-    .sidebar {
-      width: 240px;
-      background-color: #1f2937;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-    }
-    .sidebar h2 {
-      font-size: 1.2rem;
-      padding: 20px;
-      margin: 0;
-      border-bottom: 1px solid #374151;
-    }
-    .account-list {
-      flex-grow: 1;
-      overflow-y: auto;
-    }
-    .account-list button {
-      width: 100%;
-      padding: 15px 20px;
-      border: none;
-      background: none;
-      color: #d1d5db;
-      text-align: left;
-      cursor: pointer;
-    }
-    .account-list button:hover,
-    .account-list button.active {
-      background-color: #374151;
-      color: #fff;
-    }
-    .content {
-      flex-grow: 1;
-      padding: 20px;
-      overflow-y: auto;
-    }
-    .card {
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 20px;
-    }
-    .card h3 {
-      margin-top: 0;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    table th,
-    table td {
-      padding: 8px;
-      border-bottom: 1px solid #e5e7eb;
-    }
-    table th {
-      text-align: left;
-      background-color: #f3f4f6;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Intelligence Dashboard</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; display: flex; height: 100vh; }
+        .sidebar { width: 240px; background-color: #343a40; color: #fff; padding-top: 20px; overflow-y: auto; }
+        .sidebar h2 { margin: 0 0 15px 15px; font-size: 20px; font-weight: 600; }
+        .account-list { list-style: none; padding: 0; margin: 0; }
+        .account-list li { padding: 12px 20px; cursor: pointer; transition: background-color 0.2s; }
+        .account-list li:hover, .account-list li.active { background-color: #495057; }
+        .main { flex: 1; padding: 20px; overflow-y: auto; background-color: #f9f9f9; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .header h1 { margin: 0; font-size: 26px; color: #333; }
+        .header span { font-size: 14px; color: #777; }
+        .metrics { display: flex; gap: 20px; margin-bottom: 20px; }
+        .card { background-color: #fff; border-radius: 8px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); flex: 1; }
+        .card h3 { margin-top: 0; font-size: 18px; color: #333; }
+        .section { margin-bottom: 24px; }
+        .section h2 { margin-top: 0; font-size: 20px; color: #333; }
+        ul { list-style: none; padding-left: 0; }
+        .nested-list ul { margin-left: 20px; }
+        .opportunities-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .opportunities-table th, .opportunities-table td { border: 1px solid #ccc; padding: 8px; text-align: left; font-size: 14px; }
+        .opportunities-table th { background-color: #f0f0f0; font-weight: 600; }
+        a { color: #007bff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
 </head>
 <body>
-  <div class="sidebar">
-    <h2>Accounts</h2>
-    <div class="account-list" id="account-list">
-      <!-- Account buttons populated by JS -->
+    <div class="sidebar">
+        <h2>Accounts</h2>
+        <ul class="account-list" id="accountList"></ul>
     </div>
-  </div>
-  <div class="content" id="content">
-    <h2>Select an account to view intelligence</h2>
-  </div>
-  <script>
-    async function loadData() {
-      const response = await fetch('./dashboard_multi_data.json');
-      const data = await response.json();
-      return data.accounts;
-    }
-
-    function renderAccount(accountData) {
-      const content = document.getElementById('content');
-      content.innerHTML = '';
-
-      // Header
-      const header = document.createElement('h2');
-      header.textContent = accountData.account;
-      content.appendChild(header);
-
-      // Last update
-      const updatePara = document.createElement('p');
-      updatePara.textContent = 'Last updated: ' + (accountData.last_update || 'N/A');
-      content.appendChild(updatePara);
-
-      // Metrics card
-      const metricsCard = document.createElement('div');
-      metricsCard.className = 'card';
-      metricsCard.innerHTML = `
-        <h3>Summary Metrics</h3>
-        <p>Articles analysed: ${accountData.num_articles}</p>
-        <p>Unique entities: ${accountData.num_entities}</p>
-        <p>Intelligence gaps: ${accountData.num_intel_gaps}</p>
-      `;
-      content.appendChild(metricsCard);
-
-      // Top entities card
-      const entitiesCard = document.createElement('div');
-      entitiesCard.className = 'card';
-      entitiesCard.innerHTML = '<h3>Top Entities (Opportunities)</h3>';
-      if (accountData.top_entities && accountData.top_entities.length > 0) {
-        const ul = document.createElement('ul');
-        accountData.top_entities.forEach(entity => {
-          const li = document.createElement('li');
-          li.textContent = `${entity.name} (${entity.count})`;
-          ul.appendChild(li);
-        });
-        entitiesCard.appendChild(ul);
-      } else {
-        const p = document.createElement('p');
-        p.textContent = 'No entities available.';
-        entitiesCard.appendChild(p);
-      }
-      content.appendChild(entitiesCard);
-
-      // Intel gaps card
-      const gapsCard = document.createElement('div');
-      gapsCard.className = 'card';
-      gapsCard.innerHTML = '<h3>Intelligence Gaps</h3>';
-      const gaps = accountData.intel_gaps || {};
-      if (Object.keys(gaps).length > 0) {
-        const table = document.createElement('table');
-        const thead = document.createElement('thead');
-        thead.innerHTML = '<tr><th>Role</th><th>Suggested LinkedIn Search</th></tr>';
-        table.appendChild(thead);
-        const tbody = document.createElement('tbody');
-        Object.entries(gaps).forEach(([role, query]) => {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `<td>${role}</td><td>${query}</td>`;
-          tbody.appendChild(tr);
-        });
-        table.appendChild(tbody);
-        gapsCard.appendChild(table);
-      } else {
-        const p = document.createElement('p');
-        p.textContent = 'No gaps detected.';
-        gapsCard.appendChild(p);
-      }
-      content.appendChild(gapsCard);
-
-      // Additional signals card
-      function createSignalCard(title, items) {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `<h3>${title}</h3>`;
-        if (items && items.length > 0) {
-          const ul = document.createElement('ul');
-          items.forEach(item => {
-            const li = document.createElement('li');
-            // If item is an object with name/url/description, format it nicely
-            if (typeof item === 'object') {
-              const name = item.name || item.title || 'Item';
-              const url = item.url || '#';
-              const desc = item.description || item.summary || '';
-              li.innerHTML = `<a href="${url}" target="_blank">${name}</a>` + (desc ? ` – ${desc}` : '');
-            } else {
-              li.textContent = item;
+    <div class="main">
+        <div class="header">
+            <h1 id="accountName">Account Overview</h1>
+            <span id="lastUpdated"></span>
+        </div>
+        <div class="metrics" id="metricsRow"></div>
+        <div class="section">
+            <h2>Top Entities</h2>
+            <ul id="topEntities"></ul>
+        </div>
+        <div class="section">
+            <h2>Initiatives</h2>
+            <div id="initiatives"></div>
+        </div>
+        <div class="section">
+            <h2>Toptal Opportunities</h2>
+            <table class="opportunities-table">
+                <thead>
+                    <tr><th>Opportunity</th><th>Relevant Services</th><th>Decision-Maker Roles</th><th>Rationale</th></tr>
+                </thead>
+                <tbody id="opportunitiesTableBody"></tbody>
+            </table>
+        </div>
+        <div class="section">
+            <h2>Decision-Maker Roles</h2>
+            <ul id="decisionMakers"></ul>
+        </div>
+        <div class="section">
+            <h2>Org Chart</h2>
+            <div id="orgChart" class="nested-list"></div>
+        </div>
+        <div class="section">
+            <h2>Intel Gaps</h2>
+            <ul id="intelGaps"></ul>
+        </div>
+        <div class="section">
+            <h2>Additional Signals</h2>
+            <h3>GitHub Repositories</h3>
+            <ul id="githubRepos"></ul>
+            <h3>YouTube Videos</h3>
+            <ul id="youtubeVideos"></ul>
+            <h3>Podcasts</h3>
+            <ul id="podcasts"></ul>
+            <h3>Case Studies</h3>
+            <ul id="caseStudies"></ul>
+        </div>
+    </div>
+    <script>
+        async function loadData() {
+            const response = await fetch('./dashboard_multi_data.json');
+            const data = await response.json();
+            const accounts = data.accounts;
+            const list = document.getElementById('accountList');
+            accounts.forEach((acc, idx) => {
+                const li = document.createElement('li');
+                li.textContent = acc.account;
+                li.onclick = () => { displayAccount(acc, idx); };
+                list.appendChild(li);
+            });
+            if (accounts.length) {
+                displayAccount(accounts[0], 0);
+                list.children[0].classList.add('active');
             }
-            ul.appendChild(li);
-          });
-          card.appendChild(ul);
-        } else {
-          const p = document.createElement('p');
-          p.textContent = 'No items found.';
-          card.appendChild(p);
         }
-        return card;
-      }
-
-      content.appendChild(createSignalCard('GitHub Repositories', accountData.github_repos));
-      content.appendChild(createSignalCard('YouTube Videos', accountData.youtube_videos));
-      content.appendChild(createSignalCard('Podcasts', accountData.podcasts));
-      content.appendChild(createSignalCard('Case Studies', accountData.case_studies));
-    }
-
-    function initDashboard(accounts) {
-      const listEl = document.getElementById('account-list');
-      listEl.innerHTML = '';
-      accounts.forEach((acc, index) => {
-        const btn = document.createElement('button');
-        btn.textContent = acc.account;
-        btn.addEventListener('click', () => {
-          // Remove active class from all buttons
-          document.querySelectorAll('.account-list button').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          renderAccount(acc);
-        });
-        listEl.appendChild(btn);
-        // Automatically load the first account
-        if (index === 0) {
-          btn.classList.add('active');
-          renderAccount(acc);
+        function displayAccount(acc, index) {
+            const items = document.querySelectorAll('.account-list li');
+            items.forEach(item => item.classList.remove('active'));
+            if (items[index]) items[index].classList.add('active');
+            document.getElementById('accountName').textContent = acc.account;
+            document.getElementById('lastUpdated').textContent = acc.last_update ? 'Last update: ' + acc.last_update : '';
+            const metrics = document.getElementById('metricsRow');
+            metrics.innerHTML = '';
+            const metricData = [
+                {title: 'Articles', value: acc.num_articles},
+                {title: 'Entities', value: acc.num_entities},
+                {title: 'Intel Gaps', value: acc.num_intel_gaps}
+            ];
+            metricData.forEach(m => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = '<h3>' + m.title + '</h3><p>' + m.value + '</p>';
+                metrics.appendChild(card);
+            });
+            const topEntities = document.getElementById('topEntities');
+            topEntities.innerHTML = '';
+            acc.top_entities.forEach(ent => {
+                const li = document.createElement('li');
+                li.textContent = ent.name + ' (' + ent.count + ')';
+                topEntities.appendChild(li);
+            });
+            const initiatives = document.getElementById('initiatives');
+            initiatives.innerHTML = '';
+            if (acc.initiatives) {
+                acc.initiatives.forEach(init => {
+                    const div = document.createElement('div');
+                    div.className = 'card';
+                    let html = '<h3>' + init.name + '</h3><p>' + init.description + '</p>';
+                    if (init.sub_initiatives && init.sub_initiatives.length) {
+                        html += '<ul>';
+                        init.sub_initiatives.forEach(sub => {
+                            html += '<li><strong>' + sub.name + ':</strong> ' + sub.description + '</li>';
+                        });
+                        html += '</ul>';
+                    }
+                    div.innerHTML = html;
+                    initiatives.appendChild(div);
+                });
+            }
+            const oppBody = document.getElementById('opportunitiesTableBody');
+            oppBody.innerHTML = '';
+            if (acc.opportunities) {
+                acc.opportunities.forEach(op => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = '<td>' + op.name + '</td>' +
+                        '<td>' + op.services.join(', ') + '</td>' +
+                        '<td>' + op.roles.join(', ') + '</td>' +
+                        '<td>' + op.why + '</td>';
+                    oppBody.appendChild(row);
+                });
+            }
+            const dmList = document.getElementById('decisionMakers');
+            dmList.innerHTML = '';
+            if (acc.decision_makers) {
+                acc.decision_makers.forEach(role => {
+                    const li = document.createElement('li');
+                    li.textContent = role;
+                    dmList.appendChild(li);
+                });
+            }
+            const orgDiv = document.getElementById('orgChart');
+            orgDiv.innerHTML = '';
+            if (acc.org_chart) {
+                function render(node) {
+                    const ul = document.createElement('ul');
+                    const li = document.createElement('li');
+                    li.textContent = node.title;
+                    ul.appendChild(li);
+                    if (node.children) {
+                        node.children.forEach(child => {
+                            li.appendChild(render(child));
+                        });
+                    }
+                    return ul;
+                }
+                orgDiv.appendChild(render(acc.org_chart));
+            }
+            const intelList = document.getElementById('intelGaps');
+            intelList.innerHTML = '';
+            for (const role in acc.intel_gaps) {
+                const li = document.createElement('li');
+                li.innerHTML = '<strong>' + role + ':</strong> ' + acc.intel_gaps[role];
+                intelList.appendChild(li);
+            }
+            populateList('githubRepos', acc.github_repos);
+            populateList('youtubeVideos', acc.youtube_videos);
+            populateList('podcasts', acc.podcasts);
+            populateList('caseStudies', acc.case_studies);
         }
-      });
-    }
-
-    // Fetch dashboard data on page load
-    loadData().then(initDashboard).catch(err => {
-      const content = document.getElementById('content');
-      content.innerHTML = '<p>Error loading data: ' + err + '</p>';
-    });
-  </script>
+        function populateList(elementId, arr) {
+            const ul = document.getElementById(elementId);
+            ul.innerHTML = '';
+            if (arr && arr.length) {
+                arr.forEach(item => {
+                    const li = document.createElement('li');
+                    if (typeof item === 'string') {
+                        li.textContent = item;
+                    } else if (item.title && item.url) {
+                        const a = document.createElement('a');
+                        a.href = item.url;
+                        a.textContent = item.title;
+                        a.target = '_blank';
+                        li.appendChild(a);
+                    } else {
+                        li.textContent = JSON.stringify(item);
+                    }
+                    ul.appendChild(li);
+                });
+            }
+        }
+        loadData();
+    </script>
 </body>
 </html>
