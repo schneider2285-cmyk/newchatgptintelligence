@@ -86,7 +86,7 @@
   </div>
   <script>
     async function loadData() {
-      const response = await fetch('../../dashboard_multi_data.json');
+      const response = await fetch('./dashboard_multi_data.json');
       const data = await response.json();
       return data.accounts;
     }
