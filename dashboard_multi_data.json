@@ -1,0 +1,50 @@
+{
+  "last_updated": "2026-04-28 12:00:00Z",
+  "accounts": [
+    {
+      "account": "Schneider Electric",
+      "data_file": "research_schneider_electric_sample.json",
+      "last_update": "20260428T120000Z",
+      "num_articles": 5,
+      "num_entities": 12,
+      "num_intel_gaps": 2,
+      "top_entities": [
+        {"name": "AI Factory", "count": 3},
+        {"name": "Digital Twin", "count": 2},
+        {"name": "Sustainability", "count": 2},
+        {"name": "Deloitte", "count": 1},
+        {"name": "Grid", "count": 1}
+      ],
+      "intel_gaps": {
+        "EVP Software & Services": "Find the EVP Software & Services at Schneider Electric on LinkedIn",
+        "Chief Sustainability Officer": "Find the Chief Sustainability Officer at Schneider Electric on LinkedIn"
+      },
+      "github_repos": [],
+      "youtube_videos": [],
+      "podcasts": [],
+      "case_studies": []
+    },
+    {
+      "account": "ABB",
+      "data_file": "research_abb_sample.json",
+      "last_update": "20260428T120000Z",
+      "num_articles": 3,
+      "num_entities": 8,
+      "num_intel_gaps": 1,
+      "top_entities": [
+        {"name": "Robotics", "count": 2},
+        {"name": "Industrial Automation", "count": 2},
+        {"name": "Sustainability", "count": 1},
+        {"name": "Digital", "count": 1},
+        {"name": "Energy", "count": 1}
+      ],
+      "intel_gaps": {
+        "VP Robotics": "Find the VP Robotics at ABB on LinkedIn"
+      },
+      "github_repos": [],
+      "youtube_videos": [],
+      "podcasts": [],
+      "case_studies": []
+    }
+  ]
+}
