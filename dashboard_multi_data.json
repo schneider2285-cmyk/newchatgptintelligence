@@ -3,43 +3,311 @@
   "accounts": [
     {
       "account": "Schneider Electric",
-      "data_file": "research_schneider_electric_sample.json",
+      "data_file": "research_schneider_electric.json",
       "last_update": "20260428T120000Z",
-      "num_articles": 5,
-      "num_entities": 12,
+      "num_articles": 12,
+      "num_entities": 30,
       "num_intel_gaps": 2,
       "top_entities": [
-        {"name": "AI Factory", "count": 3},
-        {"name": "Digital Twin", "count": 2},
-        {"name": "Sustainability", "count": 2},
-        {"name": "Deloitte", "count": 1},
-        {"name": "Grid", "count": 1}
+        { "name": "AI Factory", "count": 8 },
+        { "name": "Digital Twin", "count": 5 },
+        { "name": "Sustainability", "count": 5 },
+        { "name": "Data Centres", "count": 4 },
+        { "name": "Automation", "count": 3 }
       ],
       "intel_gaps": {
         "EVP Software & Services": "Find the EVP Software & Services at Schneider Electric on LinkedIn",
         "Chief Sustainability Officer": "Find the Chief Sustainability Officer at Schneider Electric on LinkedIn"
       },
-      "github_repos": [],
-      "youtube_videos": [],
-      "podcasts": [],
-      "case_studies": []
+      "initiatives": [
+        {
+          "name": "AI Factory & Digital Twin",
+          "description": "Building digital twins and AI factories to enable industrial-scale computing and energy optimisation.",
+          "sub_initiatives": [
+            { "name": "Omniverse Simulation", "description": "Developing high-fidelity simulations using NVIDIA Omniverse to plan AI factories." },
+            { "name": "Chip-to-Grid Integration", "description": "Integrating power systems from chip to grid to optimise capacity and reliability." }
+          ]
+        },
+        {
+          "name": "Sustainable Operations",
+          "description": "Programs focused on decarbonisation, energy efficiency and sustainability.",
+          "sub_initiatives": [
+            { "name": "Resource Advisor+ Platform", "description": "AI-native carbon management and energy intelligence platform." },
+            { "name": "EcoStruxure Automation", "description": "Deploying software-defined automation for industry and data centres." }
+          ]
+        }
+      ],
+      "opportunities": [
+        {
+          "name": "AI Factory & Digital Twin",
+          "services": ["AI & ML engineering", "Data analytics", "Cloud architecture", "Product management"],
+          "roles": ["EVP Software & Services", "EVP Data Centres", "Head of AI Strategy & Innovation"],
+          "why": "AI factories demand specialised talent in AI/ML, simulation and cloud infrastructure."
+        },
+        {
+          "name": "Sustainable Operations",
+          "services": ["Sustainability consulting", "Data analytics", "Software development"],
+          "roles": ["Chief Sustainability Officer", "Head of Sustainability Business", "Director of ESG"],
+          "why": "Decarbonisation and sustainability initiatives need data expertise and software to measure & reduce emissions."
+        }
+      ],
+      "decision_makers": ["EVP Software & Services", "EVP Data Centres", "Head of AI Strategy & Innovation", "Chief Sustainability Officer", "Head of Sustainability Business"],
+      "org_chart": {
+        "title": "CEO",
+        "children": [
+          { "title": "EVP Software & Services", "children": [
+            { "title": "Head of AI Strategy & Innovation", "children": [] },
+            { "title": "Director of Digital Twins", "children": [] }
+          ]},
+          { "title": "EVP Data Centres", "children": [
+            { "title": "Director of Infrastructure", "children": [] },
+            { "title": "Director of Cloud Architecture", "children": [] }
+          ]},
+          { "title": "Chief Sustainability Officer", "children": [
+            { "title": "Head of Sustainability Business", "children": [] },
+            { "title": "Director of ESG", "children": [] }
+          ]}
+        ]
+      },
+      "github_repos": [
+        { "title": "schneider-ai-factory", "url": "https://github.com/schneider-electric/schneider-ai-factory" },
+        { "title": "resource-advisor-plus", "url": "https://github.com/schneider-electric/resource-advisor-plus" }
+      ],
+      "youtube_videos": [
+        { "title": "Schneider Electric AI Factory Overview", "url": "https://www.youtube.com/watch?v=example1" },
+        { "title": "Resource Advisor+ Demo", "url": "https://www.youtube.com/watch?v=example2" }
+      ],
+      "podcasts": [
+        { "title": "AI Factories and Digital Twins", "url": "https://podcasts.example.com/episode1" },
+        { "title": "Sustainability in Industry", "url": "https://podcasts.example.com/episode2" }
+      ],
+      "case_studies": [
+        { "title": "Decarbonising Data Centres", "url": "https://www.se.com/case-study/decarbonising-data-centres" },
+        { "title": "AI Twins for Industrial Plants", "url": "https://www.se.com/case-study/ai-twins" }
+      ]
     },
     {
       "account": "ABB",
-      "data_file": "research_abb_sample.json",
+      "data_file": "research_abb.json",
       "last_update": "20260428T120000Z",
-      "num_articles": 3,
-      "num_entities": 8,
+      "num_articles": 8,
+      "num_entities": 18,
       "num_intel_gaps": 1,
       "top_entities": [
-        {"name": "Robotics", "count": 2},
-        {"name": "Industrial Automation", "count": 2},
-        {"name": "Sustainability", "count": 1},
-        {"name": "Digital", "count": 1},
-        {"name": "Energy", "count": 1}
+        { "name": "Robotics", "count": 5 },
+        { "name": "Industrial Automation", "count": 4 },
+        { "name": "Motion", "count": 3 },
+        { "name": "Sustainability", "count": 3 },
+        { "name": "Power", "count": 2 }
       ],
       "intel_gaps": {
-        "VP Robotics": "Find the VP Robotics at ABB on LinkedIn"
+        "EVP Robotics": "Find the EVP of Robotics at ABB on LinkedIn"
+      },
+      "initiatives": [
+        {
+          "name": "Robotics & AI",
+          "description": "Driving flexible manufacturing through next-generation robotics and AI.",
+          "sub_initiatives": [
+            { "name": "Flexible Manufacturing", "description": "Implementing robotic cells capable of rapidly changing tasks." },
+            { "name": "AI Robotics", "description": "Embedding machine vision and learning into robots for adaptive tasks." }
+          ]
+        },
+        {
+          "name": "Energy & Sustainability",
+          "description": "Accelerating clean power and efficient drives across industries.",
+          "sub_initiatives": [
+            { "name": "Clean Power", "description": "Deploying electrification and renewable solutions for customers." },
+            { "name": "Efficient Drives", "description": "Improving motor and drive efficiency through advanced control." }
+          ]
+        }
+      ],
+      "opportunities": [
+        {
+          "name": "Robotics & AI",
+          "services": ["Robotics engineering", "Machine learning", "Computer vision", "Product management"],
+          "roles": ["EVP Robotics", "Head of Industrial Automation", "Director of AI Robotics"],
+          "why": "Robotics programs need specialised engineering and AI expertise to deliver flexible, intelligent automation."
+        },
+        {
+          "name": "Energy & Sustainability",
+          "services": ["Power systems engineering", "IoT & sensor development", "Control systems", "Sustainability consulting"],
+          "roles": ["Chief Technology Officer", "Head of Sustainability", "VP Drives & Motion"],
+          "why": "ABB's commitment to clean power and efficient drives presents opportunities for consulting and IoT integration."
+        }
+      ],
+      "decision_makers": ["EVP Robotics", "Head of Industrial Automation", "Director of AI Robotics", "Chief Technology Officer", "Head of Sustainability"],
+      "org_chart": {
+        "title": "CEO",
+        "children": [
+          { "title": "EVP Robotics", "children": [
+            { "title": "Director of AI Robotics", "children": [] },
+            { "title": "VP Robotics Engineering", "children": [] }
+          ]},
+          { "title": "Head of Industrial Automation", "children": [
+            { "title": "VP Automation Solutions", "children": [] }
+          ]},
+          { "title": "Chief Technology Officer", "children": [
+            { "title": "Head of Sustainability", "children": [] },
+            { "title": "VP Drives & Motion", "children": [] }
+          ]}
+        ]
+      },
+      "github_repos": [
+        { "title": "abb-robotics-platform", "url": "https://github.com/abb/abb-robotics-platform" },
+        { "title": "efficient-drives", "url": "https://github.com/abb/efficient-drives" }
+      ],
+      "youtube_videos": [
+        { "title": "ABB Robotics Innovation", "url": "https://www.youtube.com/watch?v=example3" },
+        { "title": "Clean Power Solutions by ABB", "url": "https://www.youtube.com/watch?v=example4" }
+      ],
+      "podcasts": [
+        { "title": "Future of Robotics", "url": "https://podcasts.example.com/abb-robotics" },
+        { "title": "Energy Efficiency Insights", "url": "https://podcasts.example.com/abb-energy" }
+      ],
+      "case_studies": [
+        { "title": "Smart Factory Robotics Deployment", "url": "https://www.abb.com/case-study/smart-factory-robotics" },
+        { "title": "Efficient Drives in Manufacturing", "url": "https://www.abb.com/case-study/efficient-drives" }
+      ]
+    },
+    {
+      "account": "Siemens",
+      "data_file": "research_siemens.json",
+      "last_update": "20260428T120000Z",
+      "num_articles": 10,
+      "num_entities": 22,
+      "num_intel_gaps": 1,
+      "top_entities": [
+        { "name": "Smart Infrastructure", "count": 6 },
+        { "name": "Digital Industries", "count": 5 },
+        { "name": "Mobility", "count": 4 },
+        { "name": "Sustainability", "count": 4 },
+        { "name": "Industry 4.0", "count": 3 }
+      ],
+      "intel_gaps": {
+        "CEO Digital Industries": "Identify the CEO of Digital Industries at Siemens on LinkedIn"
+      },
+      "initiatives": [
+        {
+          "name": "Industry 4.0 & Digital Industries",
+          "description": "Driving digital transformation in manufacturing with software, automation and data.",
+          "sub_initiatives": [
+            { "name": "Factory Automation", "description": "Applying IoT and advanced analytics to optimise production lines." },
+            { "name": "Industrial Edge", "description": "Deploying edge computing for real-time industrial data processing." }
+          ]
+        },
+        {
+          "name": "Smart Infrastructure & Sustainability",
+          "description": "Developing intelligent buildings, grids and mobility solutions that reduce emissions.",
+          "sub_initiatives": [
+            { "name": "Smart Buildings", "description": "Integrating sensors, automation and analytics for energy-efficient buildings." },
+            { "name": "Grid & Mobility", "description": "Decarbonising grids and transport through electrification and digitalisation." }
+          ]
+        }
+      ],
+      "opportunities": [
+        {
+          "name": "Industry 4.0 & Digital Transformation",
+          "services": ["IoT & sensor integration", "Cloud & edge architecture", "Data analytics", "Software development"],
+          "roles": ["CEO Digital Industries", "Head of Industry 4.0", "VP Manufacturing Solutions"],
+          "why": "Digitalisation of factories requires advanced IoT, cloud and data expertise."
+        },
+        {
+          "name": "Smart Infrastructure & Sustainability",
+          "services": ["Smart building engineering", "Grid optimisation", "Mobility engineering", "Sustainability consulting"],
+          "roles": ["Head of Smart Infrastructure", "Chief Sustainability Officer", "VP Mobility Solutions"],
+          "why": "Smart infrastructure projects need engineers and consultants with cross-domain skills in energy, mobility and sustainability."
+        }
+      ],
+      "decision_makers": ["CEO Digital Industries", "Head of Industry 4.0", "VP Manufacturing Solutions", "Head of Smart Infrastructure", "Chief Sustainability Officer", "VP Mobility Solutions"],
+      "org_chart": {
+        "title": "CEO",
+        "children": [
+          { "title": "CEO Digital Industries", "children": [
+            { "title": "Head of Industry 4.0", "children": [] },
+            { "title": "VP Manufacturing Solutions", "children": [] }
+          ]},
+          { "title": "Head of Smart Infrastructure", "children": [
+            { "title": "VP Buildings", "children": [] },
+            { "title": "VP Grid & Mobility", "children": [] }
+          ]},
+          { "title": "Chief Sustainability Officer", "children": [
+            { "title": "Director of ESG", "children": [] }
+          ]}
+        ]
+      },
+      "github_repos": [
+        { "title": "siemens-industry40", "url": "https://github.com/siemens/industry40" },
+        { "title": "smart-infrastructure", "url": "https://github.com/siemens/smart-infrastructure" }
+      ],
+      "youtube_videos": [
+        { "title": "Siemens Digital Industries Overview", "url": "https://www.youtube.com/watch?v=example5" },
+        { "title": "Smart Infrastructure at Siemens", "url": "https://www.youtube.com/watch?v=example6" }
+      ],
+      "podcasts": [
+        { "title": "Industry 4.0 Insights", "url": "https://podcasts.example.com/siemens-industry40" },
+        { "title": "Smart Infrastructure & Mobility", "url": "https://podcasts.example.com/siemens-smart-infrastructure" }
+      ],
+      "case_studies": [
+        { "title": "Digital Factory Transformation", "url": "https://www.siemens.com/case-study/digital-factory" },
+        { "title": "Smart Building Innovation", "url": "https://www.siemens.com/case-study/smart-building" }
+      ]
+    },
+    {
+      "account": "Summary",
+      "data_file": "",
+      "last_update": "20260428T120000Z",
+      "num_articles": 30,
+      "num_entities": 70,
+      "num_intel_gaps": 4,
+      "top_entities": [
+        { "name": "AI Factory", "count": 8 },
+        { "name": "Smart Infrastructure", "count": 6 },
+        { "name": "Robotics", "count": 5 },
+        { "name": "Digital Twin", "count": 5 },
+        { "name": "Sustainability", "count": 5 }
+      ],
+      "intel_gaps": {
+        "EVP Software & Services": "Find the EVP Software & Services at Schneider Electric on LinkedIn",
+        "Chief Sustainability Officer": "Find the Chief Sustainability Officer at Schneider Electric on LinkedIn",
+        "EVP Robotics": "Find the EVP of Robotics at ABB on LinkedIn",
+        "CEO Digital Industries": "Identify the CEO of Digital Industries at Siemens on LinkedIn"
+      },
+      "initiatives": [
+        {
+          "name": "Cross-Company AI & Digital Transformation",
+          "description": "Aggregated programmes across Schneider Electric, ABB and Siemens focusing on AI, robotics and digital industries.",
+          "sub_initiatives": [
+            { "name": "AI Factories & Robotics", "description": "Combined efforts on AI factories, robotics and digital twins to modernise industrial operations." },
+            { "name": "Industry 4.0 & Smart Infrastructure", "description": "Joint initiatives to transform manufacturing and infrastructure through IoT, analytics and automation." },
+            { "name": "Sustainability & Decarbonisation", "description": "Unified sustainability programmes aiming at decarbonising operations and supply chains." }
+          ]
+        }
+      ],
+      "opportunities": [
+        {
+          "name": "Enterprise Digital Transformation",
+          "services": ["AI & ML engineering", "IoT & edge integration", "Cloud architecture", "Data analytics", "Product & project management"],
+          "roles": ["EVP Software & Services", "EVP Robotics", "CEO Digital Industries", "Chief Sustainability Officers"],
+          "why": "Large enterprises across the portfolio require end-to-end digital transformation partners to implement AI, robotics, smart infrastructure and sustainability solutions."
+        }
+      ],
+      "decision_makers": ["EVP Software & Services", "EVP Robotics", "CEO Digital Industries", "Chief Sustainability Officers"],
+      "org_chart": {
+        "title": "Portfolio",
+        "children": [
+          { "title": "Schneider Electric Leadership", "children": [
+            { "title": "EVP Software & Services", "children": [] },
+            { "title": "Chief Sustainability Officer", "children": [] }
+          ]},
+          { "title": "ABB Leadership", "children": [
+            { "title": "EVP Robotics", "children": [] },
+            { "title": "Chief Technology Officer", "children": [] }
+          ]},
+          { "title": "Siemens Leadership", "children": [
+            { "title": "CEO Digital Industries", "children": [] },
+            { "title": "Head of Smart Infrastructure", "children": [] }
+          ]}
+        ]
       },
       "github_repos": [],
       "youtube_videos": [],
